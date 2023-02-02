@@ -251,25 +251,14 @@ export const SHOP_QUERY = `
       id
       name
       description
-      moneyFormat
       shipsToCountries
-      privacyPolicy {
-        body
-        handle
-        id
-        title
+      currencyFormats {
+        moneyFormat
       }
-      refundPolicy {
-        body
-        handle
-        id
-        title
-      }
-      termsOfService {
-        body
-        handle
-        id
-        title
+      primaryDomain {
+        host
+        sslEnabled
+        url
       }
     }
   }
