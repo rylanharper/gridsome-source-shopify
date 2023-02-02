@@ -48,7 +48,6 @@ export const ARTICLES_QUERY = `
           }
           tags
           title
-          url
         }
       }
     }
@@ -70,7 +69,6 @@ export const BLOGS_QUERY = `
           handle
           id
           title
-          url
         }
       }
     }
@@ -170,13 +168,9 @@ export const PRODUCTS_QUERY = `
                   id
                   originalSrc
                 }
-                metafields(first: 250) {
-                  edges {
-                    node {
-                      key
-                      value
-                    }
-                  }
+                metafields(identifiers: { namespace: "pdp_extras", key: "custom.color" }){
+                  key
+                  value
                 }
                 price: priceV2 {
                   amount
@@ -214,15 +208,10 @@ export const PRODUCTS_QUERY = `
           descriptionHtml
           handle
           id
-          metafields(first: 250) {
-            edges {
-              node {
-                key
-                value
-              }
-            }
+          metafields(identifiers: { namespace: "pdp_extras", key: "custom.color" }){
+            key
+            value
           }
-          onlineStoreUrl
           options {
             id
             name
@@ -262,21 +251,18 @@ export const SHOP_QUERY = `
         handle
         id
         title
-        url
       }
       refundPolicy {
         body
         handle
         id
         title
-        url
       }
       termsOfService {
         body
         handle
         id
         title
-        url
       }
     }
   }
