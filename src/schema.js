@@ -15,7 +15,7 @@ export const createSchema = ({ addSchemaTypes, schema, addSchemaResolvers }, { T
       interfaces: ['Node'],
       fields: {
         altText: 'String',
-        originalSrc: 'String',
+        url: 'String',
         transformedSrc: 'String'
       }
     }),
@@ -37,11 +37,11 @@ export const createSchema = ({ addSchemaTypes, schema, addSchemaResolvers }, { T
           crop: `${TYPENAMES.IMAGE}CropMode`,
           scale: 'Int'
         },
-        resolve ({ originalSrc }, { maxHeight, maxWidth, crop, scale }) {
+        resolve ({ url }, { maxHeight, maxWidth, crop, scale }) {
           // Create the transform for Shopify CDN
-          const dot = originalSrc.lastIndexOf('.')
-          const path = originalSrc.slice(0, dot)
-          const ext = originalSrc.slice(dot)
+          const dot = url.lastIndexOf('.')
+          const path = url.slice(0, dot)
+          const ext = url.slice(dot)
           const transforms = []
 
           if (maxWidth && maxHeight) transforms.push(`_${maxWidth}x${maxHeight}`)

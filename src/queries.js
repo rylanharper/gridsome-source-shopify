@@ -16,6 +16,8 @@ export const ARTICLES_QUERY = `
           }
           blog {
             id
+            handle
+            title
           }
           comments(first: 250) {
             edges {
@@ -37,8 +39,8 @@ export const ARTICLES_QUERY = `
           handle
           id
           image {
-            altText
             id
+            altText
             originalSrc
           }
           publishedAt
@@ -90,9 +92,11 @@ export const COLLECTIONS_QUERY = `
           handle
           id
           image {
-            altText
             id
-            originalSrc
+            altText
+            height
+            width
+            url
           }
           products (sortKey: COLLECTION_DEFAULT, first: $first) {
             pageInfo {
@@ -150,32 +154,38 @@ export const PRODUCTS_QUERY = `
               node {
                 id
                 altText
-                originalSrc
+                height
+                width
+                url
               }
             }
           }
           variants(first: 250) {
             edges {
               node {
+                id
                 availableForSale
-                compareAtPrice: compareAtPriceV2 {
+                compareAtPrice {
                   amount
                   currencyCode
                 }
-                id
                 image {
-                  altText
                   id
-                  originalSrc
+                  altText
+                  height
+                  width
+                  url
                 }
-                metafields(identifiers: { namespace: "pdp_extras", key: "custom.color" }){
+                metafields(identifiers: { namespace: "custom", key: "color" }){
                   key
                   value
+                  namespace
                 }
-                price: priceV2 {
+                price {
                   amount
                   currencyCode
                 }
+                quantityAvailable
                 requiresShipping
                 selectedOptions {
                   name
@@ -192,8 +202,18 @@ export const PRODUCTS_QUERY = `
               }
             }
           }
+          id
+          handle
+          createdAt
+          description
+          descriptionHtml
           availableForSale
-          compareAtPriceRange {
+          options {
+            id
+            name
+            values
+          }
+          priceRange {
             minVariantPrice {
               amount
               currencyCode
@@ -203,21 +223,7 @@ export const PRODUCTS_QUERY = `
               currencyCode
             }
           }
-          createdAt
-          description
-          descriptionHtml
-          handle
-          id
-          metafields(identifiers: { namespace: "pdp_extras", key: "custom.color" }){
-            key
-            value
-          }
-          options {
-            id
-            name
-            values
-          }
-          priceRange {
+          compareAtPriceRange {
             minVariantPrice {
               amount
               currencyCode
@@ -242,9 +248,10 @@ export const PRODUCTS_QUERY = `
 export const SHOP_QUERY = `
   query Shop {
     shop {
+      id
+      name
       description
       moneyFormat
-      name
       shipsToCountries
       privacyPolicy {
         body
@@ -281,6 +288,7 @@ export const PRODUCT_TYPES_QUERY = `
     }
   }
 `
+
 export const PRODUCT_TAGS_QUERY = `
   query ProductTags ($first: Int!) {
     data: productTags(first: $first) {
