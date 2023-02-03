@@ -48,6 +48,8 @@ export const ARTICLES_QUERY = `
             description
             title
           }
+          onlineStoreUrl
+          publishedAt
           tags
           title
         }
@@ -66,7 +68,11 @@ export const BLOGS_QUERY = `
         cursor
         node {
           authors {
+            bio
             email
+            firstName
+            lastName
+            name
           }
           handle
           id
@@ -149,6 +155,22 @@ export const PRODUCTS_QUERY = `
               }
             }
           }
+          availableForSale
+          compareAtPriceRange {
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+            maxVariantPrice {
+              amount
+              currencyCode
+            }
+          }
+          createdAt
+          description
+          descriptionHtml
+          handle
+          id
           images(first: 250) {
             edges {
               node {
@@ -160,6 +182,28 @@ export const PRODUCTS_QUERY = `
               }
             }
           }
+          onlineStoreUrl
+          options(first: 250) {
+            id
+            name
+            values
+          }
+          priceRange {
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+            maxVariantPrice {
+              amount
+              currencyCode
+            }
+          }
+          productType
+          publishedAt
+          tags
+          title
+          totalInventory
+          updatedAt
           variants(first: 250) {
             edges {
               node {
@@ -202,43 +246,6 @@ export const PRODUCTS_QUERY = `
               }
             }
           }
-          id
-          handle
-          createdAt
-          description
-          descriptionHtml
-          availableForSale
-          options {
-            id
-            name
-            values
-          }
-          priceRange {
-            minVariantPrice {
-              amount
-              currencyCode
-            }
-            maxVariantPrice {
-              amount
-              currencyCode
-            }
-          }
-          compareAtPriceRange {
-            minVariantPrice {
-              amount
-              currencyCode
-            }
-            maxVariantPrice {
-              amount
-              currencyCode
-            }
-          }
-          productType
-          publishedAt
-          tags
-          title
-          updatedAt
-          vendor
         }
       }
     }
@@ -248,18 +255,38 @@ export const PRODUCTS_QUERY = `
 export const SHOP_QUERY = `
   query Shop {
     shop {
-      id
-      name
+      brand
       description
-      shipsToCountries
-      currencyFormats {
-        moneyFormat
-      }
+      id
+      moneyFormat
+      name
       primaryDomain {
         host
         sslEnabled
         url
       }
+      privacyPolicy {
+        body
+        handle
+        id
+        title
+        url
+      }
+      refundPolicy {
+        body
+        handle
+        id
+        title
+        url
+      }
+      termsOfService {
+        body
+        handle
+        id
+        title
+        url
+      }
+      shipsToCountries
     }
   }
 `
@@ -306,6 +333,7 @@ export const PAGES_QUERY = `
           createdAt
           handle
           id
+          onlineStoreUrl
           title
           updatedAt
         }
