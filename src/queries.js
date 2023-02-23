@@ -41,7 +41,9 @@ export const ARTICLES_QUERY = `
           image {
             id
             altText
-            originalSrc
+            height
+            width
+            url
           }
           publishedAt
           seo {
